@@ -1,4 +1,5 @@
 require 'csv'
+require_relative '../app/models/legislator'
 
 class SunlightLegislatorsImporter
   def self.import(filename)
@@ -10,7 +11,24 @@ class SunlightLegislatorsImporter
 
       #   # TODO: end
       # end
-      p row['firstname']
+      birthdate_arr = row['birthdate'].split('/')
+      birthdate_of_row = birthdate_arr[1] + '/' + birthdate_arr[0] + '/' + birthdate_arr[2]
+      Legislator.create(
+        title: row['title'],
+        firstname: row['firstname'],
+        middlename: row['middlename'],
+        lastname: row['lastname'],
+        party: row['party'],
+        state: row['state'],
+        in_office: row['in_office'],
+        gender: row['gender'],
+        phone: row['phone'],
+        fax: row['fax'],
+        website: row['website'],
+        webform: row['webform'],
+        twitter_id: row['twitter_id'],
+        birthdate: birthdate_of_row
+        )
     end
   end
 end
