@@ -34,4 +34,18 @@ def legislators_by_states
 	end
 end
 
-legislators_by_states
+# legislators_by_states
+
+def total_legislators
+	puts "Senators: #{Legislator.where(title: 'Sen').count}"
+	puts "Representatives: #{Legislator.where(title: 'Rep').count}"
+end
+
+total_legislators
+
+def delete_inactive
+	Legislator.where(in_office: 0).destroy_all
+	puts 'Inactive legislators removed from records.'
+end
+
+# delete_inactive
